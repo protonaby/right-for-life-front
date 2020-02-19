@@ -3,11 +3,12 @@ import Tab from '../Tab';
 import DonateInfo from '../DonateInfo';
 import SuppliesTable from '../SuppliesTable';
 
-const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, paymentMethodsInfo, moneyTransferInfo }) => {
-  const tabLabels = ['Помочь деньгами', 'Нужды приюта'];
-  const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
-  const onTabClick = tabLabel => setActiveTab(tabLabel);
+const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, paymentMethodsInfo, moneyTransferInfo, stateSetters, toggleEditStyle, donateInfo, updateActiveTab, activeTab }) => {
+
+  const tabLabels = ['Помочь деньгами', 'Нужды приюта'];
+
+  const onTabClick = tabLabel => updateActiveTab(tabLabel);
 
   return (
     <div>
@@ -17,6 +18,7 @@ const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOp
             key={label}
             label={label}
             onClick={onTabClick}
+            isEditModeBarOpen={isEditModeBarOpen}
             active={label === activeTab}
           />
         ))}
@@ -26,6 +28,13 @@ const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOp
           <DonateInfo
             paymentMethodsInfo={paymentMethodsInfo}
             moneyTransferInfo={moneyTransferInfo}
+            stateSetters={stateSetters}
+            isEdit={isEdit}
+            isEditModeBarOpen={isEditModeBarOpen}
+            toggleEditStyle={toggleEditStyle}
+            updateIsEdit={updateIsEdit}
+            updateIsEditModeBarOpen={updateIsEditModeBarOpen}
+            donateInfo={donateInfo}
           />
         ) : (
             <SuppliesTable

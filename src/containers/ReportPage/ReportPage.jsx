@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import { useAuthChecker } from '../../helpers/useAuthChecker';
 import { API } from '../../rootConstants';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
 import { ErrorIndicator } from '../../components/ErrorIndicator';
@@ -11,6 +12,7 @@ import { Select } from '../../components/Select';
 import { CUDService } from '../../services/CUDService';
 
 const ReportPage = ({ data }) => {
+  const isAuth = useAuthChecker();
   const history = useHistory();
   const { id } = useParams();
   const titleRef = useRef(null);
@@ -73,6 +75,15 @@ const ReportPage = ({ data }) => {
       />
     );
 
+  const select = isAuth && (
+    <Select
+      classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+      chooseOptionHandler={selectOptionChoseHandler}
+      optEdit
+      optDelete
+    />
+  );
+
   return (
     <div>
       {isEditModeBarOpen ? (
@@ -83,12 +94,7 @@ const ReportPage = ({ data }) => {
           onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
-        <Select
-          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-          chooseOptionHandler={selectOptionChoseHandler}
-          optEdit
-          optDelete
-        />
+        select
       )}
 
       <div className="max-w-4xl mx-auto mb-20">

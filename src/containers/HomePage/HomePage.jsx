@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuthChecker } from '../../helpers/useAuthChecker';
 import { API } from '../../rootConstants';
 import { CUDService } from '../../services/CUDService';
 import { withFetchDataIndicators } from '../../hoc/withFetchDataIndicators';
@@ -10,6 +11,7 @@ import { Select } from '../../components/Select';
 import { UpdateImageGallery } from '../../components/UpdateImageGallery';
 
 const HomePage = ({ data }) => {
+  const isAuth = useAuthChecker();
   const [state, setState] = useState(data);
   const [isEdit, setIsEdit] = useState(false);
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
@@ -31,9 +33,18 @@ const HomePage = ({ data }) => {
 
   const setTitle = title => setState({ ...state, title });
   const setDescription = description => setState({ ...state, description });
-  const imageCarousel = state.gallery?.length ? (
+
+  const select = isAuth && (
+    <Select
+      classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+      chooseOptionHandler={selectOptionChoseHandler}
+      optEdit
+    />
+  );
+
+  const imageCarousel = state.gallery?.length && (
     <ImageCarousel data={state.gallery} />
-  ) : null;
+  );
 
   return (
     <article className="flex flex-col lg:flex-row flex-1 pb-8">
@@ -50,11 +61,7 @@ const HomePage = ({ data }) => {
           }}
         />
       ) : (
-        <Select
-          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-          chooseOptionHandler={selectOptionChoseHandler}
-          optEdit
-        />
+        select
       )}
       <section className="w-full lg:w-2/3 p-5">
         {!isEdit ? (

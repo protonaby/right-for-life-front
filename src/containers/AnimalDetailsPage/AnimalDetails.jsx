@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useAuthChecker } from '../../helpers/useAuthChecker';
 import { Card } from './Card';
 import { BackBtn, ShareBtn } from '../../components/FloatingBtn';
 import { ShareMobile } from './ShareMobile';
@@ -14,6 +15,7 @@ export const AnimalDetails = ({
   isEditModeBarOpen: isEditModeBarOpenProp,
   ...rest
 }) => {
+  const isAuth = useAuthChecker();
   const history = useHistory();
   const { pathname } = useLocation();
   const [animal, setAnimal] = useState(rest);
@@ -50,10 +52,9 @@ export const AnimalDetails = ({
           if (animal._id) {
             url = pathname.match('/.*/')[0] + animal._id;
             CUDService.PUT(url, animal);
-          }
-          else {
+          } else {
             url = pathname.match('/.*/')[0].slice(0, -1);
-            CUDService.POST(url, animal).then(response => history.goBack());
+            CUDService.POST(url, animal).then(() => history.goBack());
           }
           selectOptionChoseHandler('no-edit');
         })();
@@ -67,6 +68,15 @@ export const AnimalDetails = ({
   const updateType = newType => setAnimal({ ...animal, type: newType });
   const updateAge = newAge => setAnimal({ ...animal, age: newAge });
   const updateGender = newGender => setAnimal({ ...animal, gender: newGender });
+
+  const select = isAuth && (
+    <Select
+      classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+      chooseOptionHandler={selectOptionChoseHandler}
+      optEdit
+      optDelete
+    />
+  );
 
   return (
     <div className="-mt-6 sm:mt-0">
@@ -87,13 +97,8 @@ export const AnimalDetails = ({
           onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
-          <Select
-            classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-            chooseOptionHandler={selectOptionChoseHandler}
-            optEdit
-            optDelete
-          />
-        )}
+        select
+      )}
 
       <div
         className="flex-none sm:flex mx-auto px-0 sm:px-4"
@@ -110,8 +115,8 @@ export const AnimalDetails = ({
               isEdit
             />
           ) : (
-              <Card {...animal} isEdit={false} />
-            )}
+            <Card {...animal} isEdit={false} />
+          )}
           {isEdit && (
             <UpdateImageGallery
               images={animal.photos}
@@ -134,7 +139,7 @@ export const AnimalDetails = ({
           }
           className={`w-full sm:w-1/2 mt-10 sm:mt-5 mb-5 mx-0 sm:ml-12 sm:mr-12 md:mr-8 lg:mr-0 font-medium 
             text-gray-700 border-8 border-transparent ${
-            isEdit ? 'bg-orange-100' : ''
+              isEdit ? 'bg-orange-100' : ''
             }`}
         >
           {animal.description}

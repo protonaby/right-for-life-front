@@ -6,6 +6,7 @@ export class CUDService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: sessionStorage.getItem('token'),
       },
       body: JSON.stringify(data),
     })
@@ -20,7 +21,7 @@ export class CUDService {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'application/json'
+        Authorization: sessionStorage.getItem('token'),
       },
       body: JSON.stringify(data),
     })
@@ -33,6 +34,9 @@ export class CUDService {
   static DELETE(url) {
     return fetch(`${BE_URL}${url}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: sessionStorage.getItem('token'),
+      },
     })
       .then(response => response)
       .catch(error => {

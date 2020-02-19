@@ -13,7 +13,9 @@ export const DonateButton = ({ href, className, style }) => {
     </a>
   );
 };
-
+/*
+https://next.privat24.ua/payments/form/{"token":"cc67a469-2b4a-419a-8850-f52c596fd1b0"}
+*/
 DonateButton.defaultProps = {
   style: null,
   href: 'https://next.privat24.ua/payments',

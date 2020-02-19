@@ -1,10 +1,11 @@
 import React from 'react';
+import { useAuthChecker } from '../../helpers/useAuthChecker';
 import { ArticleItem } from '../ArticleItem';
 import { Select } from '../Select';
 import { ErrorIndicator } from '../ErrorIndicator';
 
 export const ArticlesList = ({ articles, listTitle }) => {
-  const isEdit = true;
+  const isAuth = useAuthChecker();
 
   return (
     <div>
@@ -12,7 +13,7 @@ export const ArticlesList = ({ articles, listTitle }) => {
         <h1 className="font-bold text-lightgray-700 text-4xl uppercase">
           {listTitle}
         </h1>
-        {isEdit ? <Select optAdd classNames="ml-4" /> : null}
+        {isAuth ? <Select optAdd classNames="ml-4" /> : null}
       </div>
       <div className="flex flex-wrap justify-center -mx-4 flex-grow">
         {articles?.length ? (

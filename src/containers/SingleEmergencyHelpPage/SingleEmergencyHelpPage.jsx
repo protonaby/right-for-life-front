@@ -21,12 +21,12 @@ const SingleEmergencyHelpPage = ({ data }) => {
     };
   }
 
-  if (!emergency || emergency.status === 400)
+  if (!emergency || emergency.error)
     return (
       <ErrorIndicator
         message="Страница не найдена :("
         renderAction={() => (
-          <Link to="/emergency">Вернуться на страницу срочной помощи</Link>
+          <Link to="/emergencies">Вернуться на страницу срочной помощи</Link>
         )}
       />
     );

@@ -7,13 +7,20 @@ const Tab = ({ label, onClick, active, isEditModeBarOpen }) => {
 
   return (
     <li
-      className={`flex-1 mr-2 text-center rounded-full py-2 px-4 ${colors} ${isEditModeBarOpen ? 'pointer-events-none' : ''}`}
+      className={`flex-1 mr-2 text-center rounded-full py-2 px-4 ${colors} ${
+        isEditModeBarOpen ? 'pointer-events-none' : ''
+      }`}
       onClick={() => onClick(label)}
     >
-      <button className={`outline-none font-bold ${isEditModeBarOpen ? 'cursor-not-allowed opacity-50' : ''}`} style={{ outline: 'none' }}>
+      <button
+        className={`outline-none font-bold ${
+          isEditModeBarOpen ? 'cursor-not-allowed opacity-50' : ''
+        }`}
+        style={{ outline: 'none' }}
+      >
         {label}
       </button>
-    </li >
+    </li>
   );
 };
 

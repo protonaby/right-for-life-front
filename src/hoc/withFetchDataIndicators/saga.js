@@ -8,7 +8,12 @@ function* fetchData({ payload: { api, name } }) {
   let success = null;
   let failure = null;
 
-  yield fetch(api)
+  yield fetch(api, {
+    method: 'GET',
+    headers: {
+      Authorization: sessionStorage.getItem('token'),
+    }
+  })
     .then(response => response.json())
     .then(data => {
       success = data;

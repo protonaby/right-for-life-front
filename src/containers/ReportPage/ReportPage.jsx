@@ -44,7 +44,7 @@ const ReportPage = ({ data }) => {
         break;
       case 'cancel-edit':
         // eslint-disable-next-line
-        location.reload();
+        location.replace(location.toString().replace('/new', ''));
         break;
       case 'delete':
         CUDService.DELETE(`/reports/${state._id}`).then(() => history.goBack());
@@ -65,7 +65,7 @@ const ReportPage = ({ data }) => {
     }
   };
 
-  if (!report)
+  if (!report || report.error)
     return (
       <ErrorIndicator
         message="Страница не найдена :("

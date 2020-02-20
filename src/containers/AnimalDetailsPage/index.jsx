@@ -14,7 +14,7 @@ const AnimalDetailsPage = ({ match, data }) => {
     return <AnimalDetails isEdit isEditModeBarOpen />;
   }
 
-  if (!data || data.status === 400) {
+  if (!data || data.error) {
     return (
       <ErrorIndicator
         message="Страница не найдена :("

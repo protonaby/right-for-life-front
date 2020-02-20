@@ -13,12 +13,13 @@ export const withPagination = (
   const location = useLocation();
 
   const requestedPageNum = extractAndCheckRequestedPage(props.data.totalPages);
-  if (!requestedPageNum) {
+  if (!requestedPageNum || props.data.status === 400) {
+    query.delete('page');
     return (
       <ErrorIndicator
         message="Нет такой страницы"
         renderAction={() => (
-          <Link to={`${location.pathname}`}>Вернуться к первой странице</Link>
+          <Link to={`${location.pathname}?${query.toString()}`}>Вернуться к первой странице</Link>
         )}
       />
     );

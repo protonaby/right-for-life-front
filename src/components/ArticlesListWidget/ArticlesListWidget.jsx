@@ -8,7 +8,7 @@ export const ArticlesListWidget = ({ emergency, news, happyStories }) => (
       <ArticlesListWidgetItem data={emergency} color="red" url="emergencies" />
     )}
     <ArticlesListWidgetItem
-      color="yellow"
+      color="green"
       url="help"
       data={{
         photo: 'https://i.ibb.co/bsf0vCQ/43525-799.jpg',
@@ -16,7 +16,7 @@ export const ArticlesListWidget = ({ emergency, news, happyStories }) => (
       }}
     />
     {happyStories && (
-      <ArticlesListWidgetItem data={happyStories} color="green" url="stories" />
+      <ArticlesListWidgetItem data={happyStories} url="stories" />
     )}
     {news && <ArticlesListWidgetItem data={news} url="news" />}
     <div className="min-w-full flex justify-center">

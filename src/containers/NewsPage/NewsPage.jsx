@@ -21,7 +21,7 @@ const NewsPage = ({ data }) => {
     };
   }
 
-  if (!news || news.status === 400)
+  if (!news || news.error)
     return (
       <ErrorIndicator
         message="Страница не найдена :("

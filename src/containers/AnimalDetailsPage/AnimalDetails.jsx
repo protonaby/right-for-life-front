@@ -38,7 +38,7 @@ export const AnimalDetails = ({
         break;
       case 'cancel-edit':
         // eslint-disable-next-line
-        location.reload();
+        location.replace(location.toString().replace('/new', ''));
         break;
       case 'delete':
         CUDService.DELETE(`/animals/${animal._id}`).then(() =>

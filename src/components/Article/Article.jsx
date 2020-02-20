@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import YouTube from 'react-youtube';
 import { useLocation, useHistory } from 'react-router-dom';
+import YouTube from 'react-youtube';
+import { useAuthChecker } from '../../helpers/useAuthChecker';
 import calcAge from '../../helpers/calcAge';
 import { BackBtn, ShareBtn } from '../FloatingBtn';
 import { ArticleImageGallery } from '../ArticleImageGallery';
@@ -16,6 +17,7 @@ import { Select } from '../Select';
 import { CUDService } from '../../services/CUDService';
 
 export const Article = ({ article }) => {
+  const isAuth = useAuthChecker();
   const history = useHistory();
   const { pathname } = useLocation();
   const [state, setState] = useState({ ...article });
@@ -44,7 +46,7 @@ export const Article = ({ article }) => {
         break;
       case 'cancel-edit':
         // eslint-disable-next-line
-        location.reload();
+        location.replace(location.toString().replace('/new', ''));
         break;
       case 'delete':
         CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>
@@ -88,6 +90,16 @@ export const Article = ({ article }) => {
     }
   };
 
+  const select = isAuth && (
+    <Select
+      classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
+      chooseOptionHandler={selectOptionChoseHandler}
+      optEdit
+      optDelete
+      optPinToHomePage
+    />
+  );
+
   return (
     <article>
       {!isEdit && (
@@ -105,13 +117,7 @@ export const Article = ({ article }) => {
           onCancel={() => selectOptionChoseHandler('cancel-edit')}
         />
       ) : (
-        <Select
-          classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-          chooseOptionHandler={selectOptionChoseHandler}
-          optEdit
-          optDelete
-          optPinToHomePage
-        />
+        select
       )}
 
       {isEdit ? (

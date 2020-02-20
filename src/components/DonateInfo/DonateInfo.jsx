@@ -1,11 +1,17 @@
 import React from 'react';
 
 import { CUDService } from '../../services/CUDService';
-import { EditModeBar } from '../../components/EditModeBar';
+import { EditModeBar } from '../EditModeBar';
 import { DonateButton } from '../DonateButton';
-import { setContext } from 'redux-saga/effects';
 
-const PaymentMethod = ({ name, details, isEdit, setPaymentMethod, toggleEditStyle, index }) => {
+const PaymentMethod = ({
+  name,
+  details,
+  isEdit,
+  setPaymentMethod,
+  toggleEditStyle,
+  index,
+}) => {
   return (
     <section className="mb-3">
       <h3
@@ -13,7 +19,13 @@ const PaymentMethod = ({ name, details, isEdit, setPaymentMethod, toggleEditStyl
         name="name"
         contentEditable={isEdit}
         suppressContentEditableWarning
-        onBlur={e => { setPaymentMethod(index, e.target.getAttribute('name'), e.target.innerText) }}
+        onBlur={e => {
+          setPaymentMethod(
+            index,
+            e.target.getAttribute('name'),
+            e.target.innerText,
+          );
+        }}
       >
         {name}
       </h3>
@@ -22,7 +34,13 @@ const PaymentMethod = ({ name, details, isEdit, setPaymentMethod, toggleEditStyl
         className={toggleEditStyle(isEdit)}
         contentEditable={isEdit}
         suppressContentEditableWarning
-        onBlur={e => setPaymentMethod(index, e.target.getAttribute('name'), e.target.innerText)}
+        onBlur={e =>
+          setPaymentMethod(
+            index,
+            e.target.getAttribute('name'),
+            e.target.innerText,
+          )
+        }
       >
         {details}
       </p>
@@ -37,7 +55,8 @@ const MoneyTransfer = ({
   isEdit,
   toggleEditStyle,
   setAccount,
-  setInfo }) => {
+  setInfo,
+}) => {
   return (
     <section className="moneyTransfer mb-5">
       <ul className="mb-2">
@@ -76,8 +95,17 @@ const MoneyTransfer = ({
   );
 };
 
-const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdit, toggleEditStyle, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, donateInfo }) => {
-
+const DonateInfo = ({
+  paymentMethodsInfo,
+  moneyTransferInfo,
+  stateSetters,
+  isEdit,
+  toggleEditStyle,
+  isEditModeBarOpen,
+  updateIsEdit,
+  updateIsEditModeBarOpen,
+  donateInfo,
+}) => {
   const selectOptionChoseHandler = selectedOption => {
     switch (selectedOption) {
       case 'edit':
@@ -106,13 +134,14 @@ const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdi
   if (paymentMethodsInfo) {
     return (
       <article className="payment_methods mt-10 text-center">
-        {isEditModeBarOpen &&
+        {isEditModeBarOpen && (
           <EditModeBar
             data={donateInfo}
             onEdit={() => updateIsEdit(!isEdit)}
             onSave={() => selectOptionChoseHandler('save')}
             onCancel={() => selectOptionChoseHandler('cancel-edit')}
-          />}
+          />
+        )}
         <DonateButton className="text-xl min-w-5/12 bg-yellow-300 text-yellow-700 hover:bg-yellow-400 hover:text-yellow-800 font-bold py-2 px-4 rounded-xl" />
         <h2 className="text-2xl font-bold my-3">{paymentMethodsInfo.title}</h2>
         {paymentMethodsInfo.paymentMethods.map((method, i) => (
@@ -133,15 +162,22 @@ const DonateInfo = ({ paymentMethodsInfo, moneyTransferInfo, stateSetters, isEdi
           isEdit={isEdit}
           toggleEditStyle={toggleEditStyle}
         />
-        {isEdit ? <input
-          className="bg-white focus:outline-none text-center focus:shadow-outline my-3 rounded-xl bg-gray-300 p-2 bg-orange-200 block w-full appearance-none leading-normal"
-          type="text"
-          name="privat24Token"
-          placeholder="Token от ПриватБанка"
-          onBlur={e => stateSetters.setText(e.target.getAttribute('name'), e.target.value)}>
-        </input> : null
-        }
-      </article >
+        {isEdit ? (
+          <input
+            className="bg-white focus:outline-none text-center focus:shadow-outline my-3 rounded-xl bg-gray-300 p-2 bg-orange-200 block w-full appearance-none leading-normal"
+            type="text"
+            value={donateInfo.private24Token}
+            name="privat24Token"
+            placeholder="Token от ПриватБанка"
+            onBlur={e =>
+              stateSetters.setText(
+                e.target.getAttribute('name'),
+                e.target.value,
+              )
+            }
+          />
+        ) : null}
+      </article>
     );
   }
   return null;

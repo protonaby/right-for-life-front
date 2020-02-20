@@ -5,7 +5,6 @@ import { FiltersItem } from './FiltersItem';
 
 const updateQuery = (params, location, history, query) => {
   query.delete('page');
-  console.log(query.toString());
 
   const entriesParams = Object.entries(params);
 
@@ -21,6 +20,8 @@ export const Filters = ({ filters }) => {
   const history = useHistory();
   const query = useQuery();
   const initialParams = {};
+
+  query.delete('page');
 
   [...query.entries()].forEach(([key, value]) => {
     initialParams[key] = value;

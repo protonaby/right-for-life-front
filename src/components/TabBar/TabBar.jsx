@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Tab from '../Tab';
 import DonateInfo from '../DonateInfo';
 import SuppliesTable from '../SuppliesTable';
 
-
-const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOpen, paymentMethodsInfo, moneyTransferInfo, stateSetters, toggleEditStyle, donateInfo, updateActiveTab, activeTab }) => {
-
+const TabBar = ({
+  isEdit,
+  isEditModeBarOpen,
+  updateIsEdit,
+  updateIsEditModeBarOpen,
+  paymentMethodsInfo,
+  moneyTransferInfo,
+  stateSetters,
+  toggleEditStyle,
+  donateInfo,
+  updateActiveTab,
+  activeTab,
+}) => {
   const tabLabels = ['Помочь деньгами', 'Нужды приюта'];
 
   const onTabClick = tabLabel => updateActiveTab(tabLabel);
@@ -37,13 +47,13 @@ const TabBar = ({ isEdit, isEditModeBarOpen, updateIsEdit, updateIsEditModeBarOp
             donateInfo={donateInfo}
           />
         ) : (
-            <SuppliesTable
-              isEdit={isEdit}
-              isEditModeBarOpen={isEditModeBarOpen}
-              updateIsEdit={updateIsEdit}
-              updateIsEditModeBarOpen={updateIsEditModeBarOpen}
-            />
-          )}
+          <SuppliesTable
+            isEdit={isEdit}
+            isEditModeBarOpen={isEditModeBarOpen}
+            updateIsEdit={updateIsEdit}
+            updateIsEditModeBarOpen={updateIsEditModeBarOpen}
+          />
+        )}
       </div>
     </div>
   );

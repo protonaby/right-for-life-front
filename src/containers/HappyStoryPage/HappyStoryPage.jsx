@@ -21,7 +21,7 @@ const HappyStoryPage = ({ data }) => {
     };
   }
 
-  if (!story || story.status === 400)
+  if (!story || story.error)
     return (
       <ErrorIndicator
         message="Страница не найдена :("

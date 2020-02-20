@@ -22,14 +22,22 @@ export const Select = ({
   useClickAway(componentRef, () => setIsSelectOpened(false));
 
   function handleSelectListClick(chosenOptionName) {
-    if (chosenOptionName === 'delete-request') {
-      setIsConfirmDeletePopupShown(true);
-    } else if (chosenOptionName === 'delete') {
-      chooseOptionHandler(chosenOptionName);
-      setIsSelectOpened(false);
-      setIsConfirmDeletePopupShown(false);
-    } else if (chosenOptionName === 'delete-cancel') {
-      setIsConfirmDeletePopupShown(false);
+    switch (chosenOptionName) {
+      case 'delete-request':
+        setIsConfirmDeletePopupShown(true);
+        setIsSelectOpened(false);
+        break;
+      case 'delete':
+        chooseOptionHandler(chosenOptionName);
+        setIsSelectOpened(false);
+        setIsConfirmDeletePopupShown(false);
+        break;
+      case 'delete-cancel':
+        setIsConfirmDeletePopupShown(false);
+        break;
+      default:
+        chooseOptionHandler(chosenOptionName);
+        setIsSelectOpened(false);
     }
   }
 

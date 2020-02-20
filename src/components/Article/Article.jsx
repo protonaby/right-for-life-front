@@ -46,7 +46,7 @@ export const Article = ({ article }) => {
         break;
       case 'cancel-edit':
         // eslint-disable-next-line
-        location.replace(location.toString().replace('/new', ''));
+        location.replace(location.toString().replace(/\/new$/, ''));
         break;
       case 'delete':
         CUDService.DELETE(`/${articleType}/${state._id}`).then(() =>

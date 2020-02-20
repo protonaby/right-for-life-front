@@ -1,10 +1,10 @@
 import React from 'react';
 
-const AboutContent = ({ text, isEditable, setNewText }) => {
+const AboutContent = ({ description, isEditable, setNewDescription }) => {
   return (
     <div>
       <div className="text-justify md:mx-16 mx-4">
-        {text.map((par, i) => {
+        {description.map((par, i) => {
           return (
             <p
               className={`my-3 rounded-xl bg-gray-300 p-5 ${
@@ -15,7 +15,7 @@ const AboutContent = ({ text, isEditable, setNewText }) => {
               suppressContentEditableWarning
               key={i}
               onBlur={e => {
-                setNewText(i, e.target.innerText);
+                setNewDescription(i, e.target.innerText);
               }}
             >
               {par}

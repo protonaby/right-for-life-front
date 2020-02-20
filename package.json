@@ -48,7 +48,7 @@
   },
   "scripts": {
     "start": "run-p start:js",
-    "build": "run-s build:css build:js",
+    "build": "run-s build:js",
     "start:js": "react-scripts start",
     "build:js": "react-scripts build",
     "start:css": "postcss src/styles/tailwind.src.css -o src/styles/tailwind.css -w",

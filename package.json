@@ -47,7 +47,7 @@
     "prettier": "^1.19.1"
   },
   "scripts": {
-    "start": "run-p start:css start:js",
+    "start": "run-p start:js",
     "build": "run-s build:css build:js",
     "start:js": "react-scripts start",
     "build:js": "react-scripts build",

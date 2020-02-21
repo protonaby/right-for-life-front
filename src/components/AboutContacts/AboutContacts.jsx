@@ -17,7 +17,8 @@ const AboutContacts = ({ contactsData, isEditable, setNewContact }) => {
   const handleChange = e => setNewContact(e.target.name, e.target.value);
 
   const editContactsBlock = (
-    <div className={`${linksWrapperClass}`}>
+    <div className={`${linksWrapperClass} items-center`}>
+      <label htmlFor="aboutFacebook">Facebook:</label>
       <input
         className={editContactsInputClass}
         type="text"
@@ -25,7 +26,9 @@ const AboutContacts = ({ contactsData, isEditable, setNewContact }) => {
         name="facebook"
         placeholder="ссылка на фейсбук"
         onBlur={handleChange}
+        id="aboutFacebook"
       />
+      <label htmlFor="aboutInstagram">Instagram:</label>
       <input
         className={editContactsInputClass}
         type="text"
@@ -33,7 +36,9 @@ const AboutContacts = ({ contactsData, isEditable, setNewContact }) => {
         name="instagram"
         placeholder="ссылка на инстаграм"
         onBlur={handleChange}
+        id="aboutInstagram"
       />
+      <label htmlFor="aboutPhone">Номер телефона:</label>
       <input
         className={editContactsInputClass}
         type="text"
@@ -41,11 +46,10 @@ const AboutContacts = ({ contactsData, isEditable, setNewContact }) => {
         name="phone"
         placeholder="номер телефона"
         onBlur={handleChange}
+        id="aboutPhone"
       />
       <div>
-        <label htmlFor="aboutAdditionalContacts">
-          Дополнительные контакты:
-        </label>
+        <label htmlFor="aboutEmail">Почта:</label>
         <input
           className={editContactsInputClass}
           type="text"

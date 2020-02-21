@@ -8,17 +8,13 @@ const TabBar = ({
   isEditModeBarOpen,
   updateIsEdit,
   updateIsEditModeBarOpen,
-  paymentMethodsInfo,
-  moneyTransferInfo,
-  stateSetters,
-  toggleEditStyle,
   donateInfo,
-  updateActiveTab,
   activeTab,
+  updateActiveTab,
+  stateSetters,
+  toggleEditStyle
 }) => {
   const tabLabels = ['Помочь деньгами', 'Нужды приюта'];
-
-  const onTabClick = tabLabel => updateActiveTab(tabLabel);
 
   return (
     <div>
@@ -27,7 +23,7 @@ const TabBar = ({
           <Tab
             key={label}
             label={label}
-            onClick={onTabClick}
+            onClick={tabLabel => updateActiveTab(tabLabel)}
             isEditModeBarOpen={isEditModeBarOpen}
             active={label === activeTab}
           />
@@ -36,24 +32,22 @@ const TabBar = ({
       <div>
         {activeTab === tabLabels[0] ? (
           <DonateInfo
-            paymentMethodsInfo={paymentMethodsInfo}
-            moneyTransferInfo={moneyTransferInfo}
-            stateSetters={stateSetters}
             isEdit={isEdit}
             isEditModeBarOpen={isEditModeBarOpen}
-            toggleEditStyle={toggleEditStyle}
             updateIsEdit={updateIsEdit}
             updateIsEditModeBarOpen={updateIsEditModeBarOpen}
             donateInfo={donateInfo}
+            stateSetters={stateSetters}
+            toggleEditStyle={toggleEditStyle}
           />
         ) : (
-          <SuppliesTable
-            isEdit={isEdit}
-            isEditModeBarOpen={isEditModeBarOpen}
-            updateIsEdit={updateIsEdit}
-            updateIsEditModeBarOpen={updateIsEditModeBarOpen}
-          />
-        )}
+            <SuppliesTable
+              isEdit={isEdit}
+              isEditModeBarOpen={isEditModeBarOpen}
+              updateIsEdit={updateIsEdit}
+              updateIsEditModeBarOpen={updateIsEditModeBarOpen}
+            />
+          )}
       </div>
     </div>
   );

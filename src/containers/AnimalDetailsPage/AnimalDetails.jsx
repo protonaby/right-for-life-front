@@ -153,6 +153,7 @@ AnimalDetails.defaultProps = {
   name: 'Имя питомца',
   age: 1577829600000,
   photos: [],
-  gender: '',
+  gender: 'Ж',
+  type: 'пес',
   description: 'История питомца.',
 };

@@ -17,17 +17,14 @@ const HomePage = ({ data }) => {
   const [isEditModeBarOpen, setIsEditModeBarOpen] = useState(false);
 
   const selectOptionChoseHandler = selectedOption => {
-    switch (selectedOption) {
-      case 'edit':
-        setIsEditModeBarOpen(true);
-        setIsEdit(true);
-        break;
-      case 'no-edit':
-        setIsEditModeBarOpen(false);
-        setIsEdit(false);
-        break;
-      default:
-        return null;
+    if (selectedOption === 'edit') {
+      setIsEditModeBarOpen(true);
+      setIsEdit(true);
+    }
+
+    if (selectedOption === 'no-edit') {
+      setIsEditModeBarOpen(false);
+      setIsEdit(false);
     }
   };
 
@@ -57,7 +54,7 @@ const HomePage = ({ data }) => {
             selectOptionChoseHandler('no-edit');
           }}
           onCancel={() => {
-            selectOptionChoseHandler('no-edit');
+            window.location.reload();
           }}
         />
       ) : (

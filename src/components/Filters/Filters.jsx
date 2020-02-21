@@ -24,7 +24,7 @@ export const Filters = ({ filters }) => {
   query.delete('page');
 
   [...query.entries()].forEach(([key, value]) => {
-    initialParams[key] = value;
+    if (key !== 'limit') initialParams[key] = value;
   });
 
   const [params, setParams] = useState(initialParams);
@@ -67,11 +67,9 @@ export const Filters = ({ filters }) => {
         onClick={() => {
           setParams([]);
           form.current.reset();
-          history.push(
-            location.pathname + query.has('limit')
-              ? `?limit=${query.get('limit')}`
-              : '',
-          );
+          history.push(location.pathname + (query.has('limit')
+            ? `?limit=${query.get('limit')}`
+            : ''));
         }}
         disabled={Object.keys(params).length === 0}
       >

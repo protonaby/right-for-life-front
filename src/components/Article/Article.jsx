@@ -159,7 +159,7 @@ export const Article = ({ article }) => {
 
       <div className="mx-10 md:mx-20">
         <aside className="font-medium text-lightgray-700 text-right text-xl mb-10">
-          {calcAge(state.date) ? `${calcAge(state.date)} назад` : 'сегодня'}
+          {state.date && calcAge(state.date) ? `${calcAge(state.date)} назад` : 'сегодня'}
         </aside>
       </div>
 

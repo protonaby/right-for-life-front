@@ -69,7 +69,7 @@ const AboutPage = ({ data }) => {
             selectOptionChoseHandler(false);
           }}
           onCancel={() => {
-            selectOptionChoseHandler(false);
+            window.location.reload();
           }}
         />
       ) : (

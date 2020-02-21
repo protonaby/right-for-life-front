@@ -7,14 +7,6 @@ import { Select } from '../../components/Select';
 import { useAuthChecker } from '../../helpers/useAuthChecker';
 
 const DonatePage = ({ data }) => {
-  const {
-    title,
-    manager,
-    summary,
-    paymentMethodsInfo,
-    moneyTransferInfo,
-  } = data;
-
   const isAuth = useAuthChecker();
 
   const [isEdit, setIsEdit] = useState(false);
@@ -26,19 +18,9 @@ const DonatePage = ({ data }) => {
 
   const updateIsEdit = value => setIsEdit(value);
   const updateIsEditModeBarOpen = value => setIsEditModeBarOpen(value);
+
   const toggleEditStyle = isEdit =>
     isEdit ? 'my-3 rounded-xl bg-gray-300 p-2 bg-orange-200' : '';
-
-  const selectOptionChoseHandler = selectedOption => {
-    switch (selectedOption) {
-      case 'edit':
-        setIsEditModeBarOpen(true);
-        setIsEdit(true);
-        break;
-      default:
-        return null;
-    }
-  };
 
   const stateSetters = {
     setText: (fieldName, name) => {
@@ -68,21 +50,22 @@ const DonatePage = ({ data }) => {
       {!isEditModeBarOpen && isAuth && (
         <Select
           classNames="fixed z-50 top-0 right-0 mr-10 mt-20"
-          chooseOptionHandler={selectOptionChoseHandler}
+          chooseOptionHandler={() => {
+            setIsEditModeBarOpen(true);
+            setIsEdit(true);
+          }}
           optEdit
         />
       )}
       <header className="mb-6">
-        <h1 className="text-4xl uppercase font-bold">{title}</h1>
+        <h1 className="text-4xl uppercase font-bold">{donateInfo.title}</h1>
       </header>
       <section className="mb-5">
         <h2 className="text-2xl font-bold mb-3">
           Куратор мини-приюта —{' '}
           <span
             name="manager"
-            className={toggleEditStyle(
-              isEdit && activeTab === 'Помочь деньгами',
-            )}
+            className={toggleEditStyle(isEdit && activeTab === 'Помочь деньгами')}
             contentEditable={isEdit && activeTab === 'Помочь деньгами'}
             suppressContentEditableWarning
             onBlur={e =>
@@ -92,13 +75,11 @@ const DonatePage = ({ data }) => {
               )
             }
           >
-            {manager}
+            {donateInfo.manager}
           </span>
         </h2>
         <p
-          className={`text-lg ${toggleEditStyle(
-            isEdit && activeTab === 'Помочь деньгами',
-          )}`}
+          className={`text-lg ${toggleEditStyle(isEdit && activeTab === 'Помочь деньгами')}`}
           name="summary"
           style={{ whiteSpace: 'pre-wrap' }}
           contentEditable={isEdit && activeTab === 'Помочь деньгами'}
@@ -110,7 +91,7 @@ const DonatePage = ({ data }) => {
             )
           }
         >
-          {summary}
+          {donateInfo.summary}
         </p>
       </section>
       <TabBar
@@ -118,13 +99,11 @@ const DonatePage = ({ data }) => {
         updateIsEdit={updateIsEdit}
         isEditModeBarOpen={isEditModeBarOpen}
         updateIsEditModeBarOpen={updateIsEditModeBarOpen}
-        paymentMethodsInfo={paymentMethodsInfo}
-        moneyTransferInfo={moneyTransferInfo}
+        donateInfo={donateInfo}
+        activeTab={activeTab}
+        updateActiveTab={updateActiveTab}
         stateSetters={stateSetters}
         toggleEditStyle={toggleEditStyle}
-        donateInfo={donateInfo}
-        updateActiveTab={updateActiveTab}
-        activeTab={activeTab}
       />
     </div>
   );

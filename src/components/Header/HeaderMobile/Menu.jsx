@@ -9,7 +9,7 @@ export const Menu = () => (
     <HeaderItem to="/" title="Главная" />
 
     <HeaderItem to="/help" title="Помощь" color="green" />
-    <HeaderItem to="/animals" title="Питомцы" />
+    <HeaderItem to="/animals?limit=8" title="Питомцы" />
     <HeaderItem to="/stories" title="Счастливые истории" />
 
     <HeaderItem to="/emergencies" title="Срочники" color="red" />

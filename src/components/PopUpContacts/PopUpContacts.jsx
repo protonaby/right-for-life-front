@@ -27,7 +27,7 @@ export const PopUpContacts = ({ handleShowingModal }) => {
       <section className="flex justify-between items-center">
         <p className="text-2xl font-bold">Свяжитесь с нами</p>
         <button
-          className="modal-close cursor-pointer self-start"
+          className="modal-close cursor-pointer self-start focus:outline-none"
           onClick={handleShowingModal}
         >
           <svg
@@ -46,7 +46,7 @@ export const PopUpContacts = ({ handleShowingModal }) => {
           Чтобы приютить питомца, пожалуйста, свяжитесь с координатором Ольгой
         </span>
       </section>
-      <section className="flex flex-wrap justify-center outline-none">
+      <section className="flex flex-wrap justify-center">
         <a
           href="tel:0932350370"
           className="flex flex-0 justify-center items-center w-16 h-16 m-2 bg-green-600 rounded-full"

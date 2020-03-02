@@ -31,13 +31,13 @@ export const EditModeBarDialog = ({ message, onTrue, onFalse }) => {
       </p>
       <div className="flex justify-center">
         <button
-          className="mx-2 mt-6 w-24 py-2 rounded-lg font-bold text-green-800 bg-green-300 hover:bg-green-400 uppercase"
+          className="mx-2 mt-6 w-24 py-2 rounded-lg font-bold text-green-800 bg-green-300 hover:bg-green-400 uppercase focus:outline-none"
           onClick={onTrue}
         >
           Да
         </button>
         <button
-          className="mx-2 mt-6 w-24 py-2 rounded-lg font-bold text-green-800 bg-green-300 hover:bg-green-400 uppercase"
+          className="mx-2 mt-6 w-24 py-2 rounded-lg font-bold text-green-800 bg-green-300 hover:bg-green-400 uppercase focus:outline-none"
           onClick={onFalse}
         >
           Нет

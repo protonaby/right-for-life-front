@@ -5,7 +5,7 @@ import { DonateButton } from '../DonateButton';
 export const ArticlesListWidget = ({ emergency, news, happyStories }) => (
   <article className="h-full w-full flex flex-wrap flex-row lg:flex-col rounded-xl font-bold text-lightgray-700">
     {emergency && (
-      <ArticlesListWidgetItem color="red" url="emergencies" data={emergency} />
+      <ArticlesListWidgetItem data={emergency} color="red" url="emergencies" />
     )}
     <ArticlesListWidgetItem
       color="green"

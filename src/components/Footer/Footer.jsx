@@ -40,7 +40,7 @@ const Footer = ({ data }) => {
         </li>
       </ul>
       <span className="hidden md:flex text-center mx-24 my-2">
-        Designed by SoftServe Inc.
+        Designed by SoftServe Dnipro IT Academy
       </span>
       <section className="flex items-center sm:flex-row">
         <NavLink

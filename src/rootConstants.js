@@ -1,4 +1,4 @@
-export const BE_URL = 'https://right-for-life-back.herokuapp.com';
+export const BE_URL = 'http://localhost:4000';
 
 export const API = Object.freeze({
   HOME: {
